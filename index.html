@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anime AI Calculator</title>
+
+  <style>
+
+    body {
+      background: linear-gradient(to bottom right,#1a002e,#000000);
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    h1 {
+      color: #ff66cc;
+      text-shadow: 0 0 10px #ff66cc;
+    }
+
+    .calculator {
+      width: 320px;
+      margin: auto;
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    input {
+      width: 260px;
+      height: 60px;
+      font-size: 28px;
+      margin-bottom: 15px;
+      text-align: right;
+      padding-right: 10px;
+      border-radius: 10px;
+      border: none;
+      background: #111;
+      color: #00ffff;
+      box-shadow: 0 0 10px #00ffff;
+    }
+
+    button {
+      width: 60px;
+      height: 60px;
+      margin: 5px;
+      border: none;
+      border-radius: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(to bottom right,#ff00cc,#3333ff);
+      box-shadow: 0 0 10px #ff00cc;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    .currency-box {
+      margin-top: 40px;
+    }
+
+    select {
+      width: 120px;
+      height: 40px;
+      font-size: 18px;
+      border-radius: 10px;
+      margin: 5px;
+    }
+
+    .currency-input {
+      width: 220px;
+      height: 45px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>Anime AI Calculator</h1>
+
+<div class="calculator">
+
+<input type="text" id="display" readonly>
+
+<br>
+
+<button onclick="add('7')">7</button>
+<button onclick="add('8')">8</button>
+<button onclick="add('9')">9</button>
+<button onclick="add('/')">÷</button>
+
+<br>
+
+<button onclick="add('4')">4</button>
+<button onclick="add('5')">5</button>
+<button onclick="add('6')">6</button>
+<button onclick="add('*')">×</button>
+
+<br>
+
+<button onclick="add('1')">1</button>
+<button onclick="add('2')">2</button>
+<button onclick="add('3')">3</button>
+<button onclick="add('-')">-</button>
+
+<br>
+
+<button onclick="add('0')">0</button>
+<button onclick="calculate()">=</button>
+<button onclick="clearDisplay()">C</button>
+<button onclick="add('+')">+</button>
+
+</div>
+
+<div class="currency-box">
+
+<h2 style="color:#00ffff;">Currency Converter</h2>
+
+<input type="number" id="amount"
+placeholder="Enter Amount"
+class="currency-input">
+
+<br><br>
+
+<select id="fromCurrency">
+  <option value="INR">INR</option>
+  <option value="USD">USD</option>
+  <option value="EUR">EUR</option>
+  <option value="GBP">GBP</option>
+  <option value="AED">AED</option>
+</select>
+
+<select id="toCurrency">
+  <option value="USD">USD</option>
+  <option value="INR">INR</option>
+  <option value="EUR">EUR</option>
+  <option value="GBP">GBP</option>
+  <option value="AED">AED</option>
+</select>
+
+<br><br>
+
+<button onclick="convertCurrency()">
+Convert
+</button>
+
+<h2 id="result"></h2>
+
+</div>
+
+<script>
+
+function add(value) {
+  document.getElementById("display").value += value;
+}
+
+function calculate() {
+  let result = eval(document.getElementById("display").value);
+  document.getElementById("display").value = result;
+}
+
+function clearDisplay() {
+  document.getElementById("display").value = "";
+}
+
+function convertCurrency() {
+
+  let amount =
+  document.getElementById("amount").value;
+
+  let from =
+  document.getElementById("fromCurrency").value;
+
+  let to =
+  document.getElementById("toCurrency").value;
+
+  let rates = {
+    INR: 1,
+    USD: 83,
+    EUR: 90,
+    GBP: 105,
+    AED: 23
+  };
+
+  let inrAmount = amount * rates[from];
+
+  let finalAmount = inrAmount / rates[to];
+
+  document.getElementById("result").innerHTML =
+    amount + " " + from + " = " +
+    finalAmount.toFixed(2) + " " + to;
+}
+
+</script>
+
+</body>
+</html>
